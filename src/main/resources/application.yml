@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    com.bravo.demo.dao: debug
+
+#关于MyBatis-Plus的设置
+mybatis-plus:
+  # 别名扫描路径。这样Mapper.xml中的每个语句的resultType就不用写全路径了（但我还是习惯写全路径，尤其类很多的时候，不看路径不知道谁是谁）
+  type-aliases-package: com.muyi.mybatisplus.pojo
+
+  # Mapper.xml扫描路径。然后在Mapper接口写上自定义方法并关联XML语句，即可实现手写SQL
+  mapper-locations: classpath*:mapper/**/*.xml
+
+  # MyBatis-Plus驼峰转换，配置后不论手写SQL还是接口方法，都能自动映射（默认on）
+  configuration:
+    map-underscore-to-camel-case: on
+
+  # 全局设置：主键生成策略、逻辑删除字段
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
